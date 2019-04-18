@@ -1,0 +1,17 @@
+.Timer {
+  display: inline-block;
+  margin: 0 auto;
+  color: #627ad9;
+  align-items: center;
+  .text-field {
+    margin: 10px 0 30px 0;
+    &:before {
+      border-bottom: 1px solid rgb(225, 225, 225);
+    }
+    input::placeholder {
+      color: #5a76d5;
+      opacity: 1;
+      text-align: center;
+    }
+  }
+}
