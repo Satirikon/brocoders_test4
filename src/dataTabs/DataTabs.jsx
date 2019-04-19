@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { AppBar, Tabs, Tab } from '@material-ui/core/';
+import './DataTabs.scss';
 
 import TasksChart from './tasksChart/TasksChart';
 import TasksLog from './tasksLog/TasksLog';
@@ -15,6 +16,7 @@ class DataTabs extends Component {
 
   render() {
     const { activeTab } = this.state;
+
     return (
       <div className="tabs-menu">
         <AppBar position="static">
@@ -26,6 +28,7 @@ class DataTabs extends Component {
             <Tab label="TASKS CHART" />
           </Tabs>
         </AppBar>
+
         {activeTab === 0 && <TasksLog />}
         {activeTab === 1 && <TasksChart />}
       </div>

@@ -1,17 +1,15 @@
 import React, { Component } from 'react';
-import { Button, TextField, Avatar, withStyles } from '@material-ui/core';
-import moment from 'moment';
+import { Button, TextField, Avatar } from '@material-ui/core';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 
-import { setItem, getItem, removeItem } from '../helpers/localStorage';
 import AlertModal from './alert/Alert';
-import './Timer.scss';
+import { setItem, getItem, removeItem } from '../helpers/localStorage';
+import { addTimer } from '../dataTabs/dataTabs.actions';
+import { TIMER_START_TIME } from './timer.constants';
+import { HHMMSS } from '../helpers/time';
 
-const styles = () => ({
-  textField: {
-    marginTop: '10px',
-    marginBottom: '50px'
-  }
-});
+import './Timer.scss';
 
 class Timer extends Component {
   constructor(props) {
@@ -19,44 +17,48 @@ class Timer extends Component {
     this.timer = null;
 
     this.state = {
-      taskName: '',
-      currentTime: 0,
-      startTime: getItem('timerStartTime') || 0,
+      name: '',
+      duration: 0,
+      start: getItem(TIMER_START_TIME) || 0,
       isModalOpened: false
     };
   }
 
   componentWillMount() {
-    if (this.state.startTime) this.onStart(this.state.startTime);
+    if (this.state.start) this.onStart(this.state.start);
   }
 
-  onStart = (startTime = new Date().getTime()) => {
-    this.setState({ startTime, currentTime: new Date().getTime() - startTime });
-    setItem('timerStartTime', startTime);
+  onStart = (start = new Date().getTime()) => {
+    this.setState({ start, duration: new Date().getTime() - start });
+    setItem(TIMER_START_TIME, start);
     this.timer = setInterval(() => {
       this.setState({
-        currentTime: new Date().getTime() - this.state.startTime
+        duration: new Date().getTime() - this.state.start
       });
     }, 1000);
   };
 
   onStop = () => {
-    if (!this.state.taskName) return this.setState({ isModalOpened: true });
+    if (!this.state.name) return this.setState({ isModalOpened: true });
 
     clearInterval(this.timer);
-    this.setState({
-      currentTime: 0,
-      startTime: 0,
-      taskName: ''
+
+    this.props.addTimer({
+      start: this.state.start,
+      duration: this.state.duration,
+      name: this.state.name
     });
-    removeItem('timerStartTime');
+
+    removeItem(TIMER_START_TIME);
+
+    this.setState({ name: '', start: 0, duration: 0 });
   };
 
-  onTaskNameChange = e => this.setState({ taskName: e.target.value });
+  onTaskNameChange = e => this.setState({ name: e.target.value.trim() });
 
   render() {
-    // const { classes } = this.props;
-    const { startTime, currentTime, isModalOpened } = this.state;
+    const { start, duration, isModalOpened } = this.state;
+
     return (
       <div className="Timer">
         <TextField
@@ -66,20 +68,24 @@ class Timer extends Component {
           className="text-field"
           onChange={this.onTaskNameChange}
         />
-        <Avatar style={{ width: 200, height: 200 }}>
-          {moment.utc(currentTime).format('HH:mm:ss')}
-        </Avatar>
+        <Avatar className="timer-circle">{HHMMSS(duration)}</Avatar>
 
-        {!!startTime && (
-          <Button variant="contained" color="primary" onClick={this.onStop}>
+        {!!start && (
+          <Button
+            variant="contained"
+            color="primary"
+            className="button"
+            onClick={this.onStop}
+          >
             Stop
           </Button>
         )}
 
-        {!startTime && (
+        {!start && (
           <Button
             variant="contained"
             color="primary"
+            className="button"
             onClick={() => this.onStart()}
           >
             Start
@@ -95,4 +101,10 @@ class Timer extends Component {
   }
 }
 
-export default withStyles(styles)(Timer);
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({ addTimer }, dispatch);
+
+export default connect(
+  null,
+  mapDispatchToProps
+)(Timer);

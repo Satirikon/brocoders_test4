@@ -1,8 +1,10 @@
 .Timer {
-  display: inline-block;
+  display: flex;
+  flex-direction: column;
   margin: 0 auto;
   color: #627ad9;
   align-items: center;
+  font-weight: 700;
   .text-field {
     margin: 10px 0 30px 0;
     &:before {
@@ -12,6 +14,24 @@
       color: #5a76d5;
       opacity: 1;
       text-align: center;
+    }
+  }
+
+  .timer-circle {
+    width: 300px;
+    height: 300px;
+    color: #5a76d5;
+    margin: 10px 0 30px 0;
+  }
+
+  .button {
+    margin: 10px 0 30px 0;
+    background-color: white;
+    width: 150px;
+    height: 50px;
+    span {
+      color: #5a76d5;
+      font-weight: 700;
     }
   }
 }
