@@ -48,7 +48,7 @@ class TimerInfo extends Component {
             <Button
               variant="contained"
               color="primary"
-              className="action-button"
+              className="action-button right"
             >
               Go Back
             </Button>

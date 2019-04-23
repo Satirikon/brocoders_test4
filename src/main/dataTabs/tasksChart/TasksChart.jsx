@@ -38,7 +38,7 @@ class TasksChart extends Component {
         <Button
           variant="contained"
           color="primary"
-          className="action-button"
+          className="action-button right"
           onClick={() => generateTimers()}
         >
           Generate
