@@ -9,7 +9,7 @@ class Router extends Component {
   render() {
     const { timers } = this.props;
     return (
-      <BrowserRouter>
+      <BrowserRouter basename={process.env.PUBLIC_URL}>
         <Switch>
           <Route exact path="/notFound" component={NotFound} />
           <Route
