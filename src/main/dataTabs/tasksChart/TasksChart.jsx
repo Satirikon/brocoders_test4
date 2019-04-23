@@ -7,16 +7,18 @@ import {
   Tooltip,
   Bar,
   CartesianGrid,
-  Legend
+  Legend,
+  ResponsiveContainer
 } from 'recharts';
 import { Button } from '@material-ui/core';
-import { getMinutesPerHour, generateTimers } from './taskChart.service';
+import { getMinutesPerHour } from './taskChart.service';
 import { bindActionCreators } from 'redux';
-import { setTimers } from '../dataTabs.actions';
+import { generateTimers } from '../dataTabs.actions';
+import './TasksChart.scss';
 
 class TasksChart extends Component {
   render() {
-    const { timers, setTimers } = this.props;
+    const { timers, generateTimers } = this.props;
 
     const dataArr = [...new Array(24)].map(() => ({ minutes: 0 }));
     timers.forEach(timer => {
@@ -28,22 +30,24 @@ class TasksChart extends Component {
 
     return (
       <div className="tasks-chart">
-        <BarChart width={730} height={250} data={dataArr}>
-          <CartesianGrid strokeDasharray="3 3" />
-          <XAxis />
-          <YAxis />
-          <Tooltip />
-          <Legend />
-          <Bar dataKey="minutes" fill="#8884d8" />
-        </BarChart>
+        <ResponsiveContainer height={500}>
+          <BarChart className="bar-chart" data={dataArr}>
+            <CartesianGrid strokeDasharray="3 3" />
+            <XAxis />
+            <YAxis />
+            <Tooltip />
+            <Legend />
+            <Bar dataKey="minutes" fill="#8884d8" />
+          </BarChart>
+        </ResponsiveContainer>
 
         <Button
           variant="contained"
           color="primary"
-          className="button"
-          onClick={() => setTimers(generateTimers())}
+          className="action-button"
+          onClick={() => generateTimers()}
         >
-          Generate Tasks
+          Generate
         </Button>
       </div>
     );
@@ -52,7 +56,8 @@ class TasksChart extends Component {
 
 const mapStateToProps = state => ({ timers: state.timers });
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ setTimers }, dispatch);
+  bindActionCreators({ generateTimers }, dispatch);
+
 export default connect(
   mapStateToProps,
   mapDispatchToProps

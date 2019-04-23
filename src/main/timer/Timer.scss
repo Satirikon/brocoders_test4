@@ -7,8 +7,10 @@
   font-weight: 700;
   .text-field {
     margin: 10px 0 30px 0;
-    &:before {
-      border-bottom: 1px solid rgb(225, 225, 225);
+    .MuiInputBase-root-18 {
+      &:before {
+        border-bottom: 1px solid rgba(225, 225, 225, 0.9);
+      }
     }
     input::placeholder {
       color: #5a76d5;
@@ -22,16 +24,14 @@
     height: 300px;
     color: #5a76d5;
     margin: 10px 0 30px 0;
+    background-color: white;
+    border: 1px solid white;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
   }
 
-  .button {
+  .action-button {
     margin: 10px 0 30px 0;
-    background-color: white;
     width: 150px;
     height: 50px;
-    span {
-      color: #5a76d5;
-      font-weight: 700;
-    }
   }
 }

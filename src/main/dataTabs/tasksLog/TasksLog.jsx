@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import {
   Table,
   TableBody,
@@ -10,6 +11,8 @@ import {
 import connect from 'react-redux/es/connect/connect';
 import { bindActionCreators } from 'redux';
 import { deleteTimer } from '../dataTabs.actions';
+import './TasksLog.scss';
+import { HHMMSS } from '../../../helpers/time';
 
 class TasksLog extends Component {
   render() {
@@ -21,12 +24,12 @@ class TasksLog extends Component {
           <TableHead>
             <TableRow>
               <TableCell>№</TableCell>
-              <TableCell align="right">Task</TableCell>
-              <TableCell align="right">Time Start</TableCell>
-              <TableCell align="right">Time end</TableCell>
-              <TableCell align="right">Time Spend</TableCell>
-              <TableCell align="right">Info</TableCell>
-              <TableCell align="right">Delete</TableCell>
+              <TableCell align="center">Task</TableCell>
+              <TableCell align="center">Time Start</TableCell>
+              <TableCell align="center">Time end</TableCell>
+              <TableCell align="center">Time Spend</TableCell>
+              <TableCell align="center">Info</TableCell>
+              <TableCell align="center">Delete</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -35,23 +38,28 @@ class TasksLog extends Component {
                 <TableCell component="th" scope="row">
                   {index + 1}
                 </TableCell>
-                <TableCell align="right">{timer.name}</TableCell>
-                <TableCell align="right">{timer.start}</TableCell>
-                <TableCell align="right">
-                  {timer.start + timer.duration}
+                <TableCell align="center">{timer.name}</TableCell>
+                <TableCell align="center">{HHMMSS(timer.start)}</TableCell>
+                <TableCell align="center">
+                  {HHMMSS(timer.start + timer.duration)}
                 </TableCell>
-                <TableCell align="right">{timer.duration}</TableCell>
-                <TableCell align="right">
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={() => console.log('click info')}
-                  >
-                    INFO
-                  </Button>
+                <TableCell align="center">
+                  {HHMMSS(timer.duration, true)}
                 </TableCell>
-                <TableCell align="right">
+                <TableCell align="center" className="wrapper">
+                  <Link to={`/tasks/${timer.id}`} className="link">
+                    <Button
+                      className="action-button"
+                      variant="contained"
+                      color="primary"
+                    >
+                      INFO
+                    </Button>
+                  </Link>
+                </TableCell>
+                <TableCell align="center" className="wrapper">
                   <Button
+                    className="action-button"
                     variant="contained"
                     color="primary"
                     onClick={() => deleteTimer(index)}

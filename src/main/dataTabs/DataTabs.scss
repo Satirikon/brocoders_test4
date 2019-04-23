@@ -1,0 +1,11 @@
+.tabs-menu {
+  width: 100%;
+  .header-menu {
+    width: 100%;
+    background-color: rgba(1, 188, 213, 1);
+    .tasks-menu {
+      max-width: none;
+      width: 50%;
+    }
+  }
+}

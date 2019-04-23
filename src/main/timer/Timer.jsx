@@ -2,12 +2,13 @@ import React, { Component } from 'react';
 import { Button, TextField, Avatar } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
+import uuidv1 from 'uuid/v1';
 
 import AlertModal from './alert/Alert';
-import { setItem, getItem, removeItem } from '../helpers/localStorage';
+import { setItem, getItem, removeItem } from '../../helpers/localStorage';
 import { addTimer } from '../dataTabs/dataTabs.actions';
 import { TIMER_START_TIME } from './timer.constants';
-import { HHMMSS } from '../helpers/time';
+import { HHMMSS } from '../../helpers/time';
 
 import './Timer.scss';
 
@@ -15,11 +16,11 @@ class Timer extends Component {
   constructor(props) {
     super(props);
     this.timer = null;
-
+    const localStorageStartTime = getItem(TIMER_START_TIME);
     this.state = {
       name: '',
       duration: 0,
-      start: getItem(TIMER_START_TIME) || 0,
+      start: localStorageStartTime ? Number(localStorageStartTime) : 0,
       isModalOpened: false
     };
   }
@@ -44,6 +45,7 @@ class Timer extends Component {
     clearInterval(this.timer);
 
     this.props.addTimer({
+      id: uuidv1(),
       start: this.state.start,
       duration: this.state.duration,
       name: this.state.name
@@ -57,24 +59,25 @@ class Timer extends Component {
   onTaskNameChange = e => this.setState({ name: e.target.value.trim() });
 
   render() {
-    const { start, duration, isModalOpened } = this.state;
+    const { name, start, duration, isModalOpened } = this.state;
 
     return (
       <div className="Timer">
         <TextField
           id="standard-bare"
           placeholder="Name of your task"
+          value={name}
           margin="normal"
           className="text-field"
           onChange={this.onTaskNameChange}
         />
-        <Avatar className="timer-circle">{HHMMSS(duration)}</Avatar>
+        <Avatar className="timer-circle">{HHMMSS(duration, true)}</Avatar>
 
         {!!start && (
           <Button
             variant="contained"
             color="primary"
-            className="button"
+            className="action-button"
             onClick={this.onStop}
           >
             Stop
@@ -85,7 +88,7 @@ class Timer extends Component {
           <Button
             variant="contained"
             color="primary"
-            className="button"
+            className="action-button"
             onClick={() => this.onStart()}
           >
             Start

@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux';
 
-import timersReducer from './dataTabs/dataTabs.reducer';
+import timersReducer from './main/dataTabs/dataTabs.reducer';
 
 const appReducer = combineReducers({
   timers: timersReducer
