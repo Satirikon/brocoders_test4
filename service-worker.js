@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/3.6.3/workbox-sw.js");
 
 importScripts(
-  "/brocoders_test4/precache-manifest.5d95999cb746c087cd6561c51afc1bfd.js"
+  "https://satirikon.github.io/brocoders_test4 /precache-manifest.01443d77ab8ef94ab54482464c65e09e.js"
 );
 
 workbox.clientsClaim();
@@ -28,7 +28,7 @@ self.__precacheManifest = [].concat(self.__precacheManifest || []);
 workbox.precaching.suppressWarnings();
 workbox.precaching.precacheAndRoute(self.__precacheManifest, {});
 
-workbox.routing.registerNavigationRoute("/brocoders_test4/index.html", {
+workbox.routing.registerNavigationRoute("https://satirikon.github.io/brocoders_test4 /index.html", {
   
   blacklist: [/^\/_/,/\/[^\/]+\.[^\/]+$/],
 });
