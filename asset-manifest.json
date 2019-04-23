@@ -1,13 +1,13 @@
 {
-  "main.css": "https://satirikon.github.io/brocoders_test4 /static/css/main.73cbe276.chunk.css",
-  "main.js": "https://satirikon.github.io/brocoders_test4 /static/js/main.f93f5c87.chunk.js",
-  "main.js.map": "https://satirikon.github.io/brocoders_test4 /static/js/main.f93f5c87.chunk.js.map",
-  "runtime~main.js": "https://satirikon.github.io/brocoders_test4 /static/js/runtime~main.00fbb6d9.js",
-  "runtime~main.js.map": "https://satirikon.github.io/brocoders_test4 /static/js/runtime~main.00fbb6d9.js.map",
-  "static/js/2.eee022a3.chunk.js": "https://satirikon.github.io/brocoders_test4 /static/js/2.eee022a3.chunk.js",
-  "static/js/2.eee022a3.chunk.js.map": "https://satirikon.github.io/brocoders_test4 /static/js/2.eee022a3.chunk.js.map",
-  "index.html": "https://satirikon.github.io/brocoders_test4 /index.html",
-  "precache-manifest.01443d77ab8ef94ab54482464c65e09e.js": "https://satirikon.github.io/brocoders_test4 /precache-manifest.01443d77ab8ef94ab54482464c65e09e.js",
-  "service-worker.js": "https://satirikon.github.io/brocoders_test4 /service-worker.js",
-  "static/css/main.73cbe276.chunk.css.map": "https://satirikon.github.io/brocoders_test4 /static/css/main.73cbe276.chunk.css.map"
+  "main.css": "http://localhost:3000 /static/css/main.73cbe276.chunk.css",
+  "main.js": "http://localhost:3000 /static/js/main.cd0461b6.chunk.js",
+  "main.js.map": "http://localhost:3000 /static/js/main.cd0461b6.chunk.js.map",
+  "runtime~main.js": "http://localhost:3000 /static/js/runtime~main.355e5a83.js",
+  "runtime~main.js.map": "http://localhost:3000 /static/js/runtime~main.355e5a83.js.map",
+  "static/js/2.eee022a3.chunk.js": "http://localhost:3000 /static/js/2.eee022a3.chunk.js",
+  "static/js/2.eee022a3.chunk.js.map": "http://localhost:3000 /static/js/2.eee022a3.chunk.js.map",
+  "index.html": "http://localhost:3000 /index.html",
+  "precache-manifest.1d819238b188dbeb80ae8d0c3fb7cf74.js": "http://localhost:3000 /precache-manifest.1d819238b188dbeb80ae8d0c3fb7cf74.js",
+  "service-worker.js": "http://localhost:3000 /service-worker.js",
+  "static/css/main.73cbe276.chunk.css.map": "http://localhost:3000 /static/css/main.73cbe276.chunk.css.map"
 }
