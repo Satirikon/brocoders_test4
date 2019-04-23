@@ -1,7 +1,7 @@
 const getSeconds = time => time.getSeconds() + time.getMinutes() * 60;
 
-export const getMinutesPerHour = (start, duration) => {
-  const end = new Date(start + duration);
+const getMinutesPerHour = (start, duration) => {
+  const end = new Date(+start + +duration);
   start = new Date(start);
 
   const outp = [];
@@ -25,4 +25,15 @@ export const getMinutesPerHour = (start, duration) => {
   }
 
   return outp;
+};
+
+export const getChartData = timers => {
+  let dataArr = [...new Array(24)].map(() => ({ minutes: 0 }));
+  timers.forEach(timer => {
+    const minutesPerHour = getMinutesPerHour(timer.start, timer.duration);
+    minutesPerHour.forEach(range => {
+      dataArr[range.hour].minutes = range.minutes;
+    });
+  });
+  return dataArr;
 };

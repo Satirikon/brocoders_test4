@@ -11,7 +11,7 @@ import {
   ResponsiveContainer
 } from 'recharts';
 import { Button } from '@material-ui/core';
-import { getMinutesPerHour } from './taskChart.service';
+import { getChartData } from './taskChart.service';
 import { bindActionCreators } from 'redux';
 import { generateTimers } from '../dataTabs.actions';
 import './TasksChart.scss';
@@ -20,13 +20,7 @@ class TasksChart extends Component {
   render() {
     const { timers, generateTimers } = this.props;
 
-    const dataArr = [...new Array(24)].map(() => ({ minutes: 0 }));
-    timers.forEach(timer => {
-      const minutesPerHour = getMinutesPerHour(timer.start, timer.duration);
-      minutesPerHour.forEach(range => {
-        dataArr[range.hour].minutes = range.minutes;
-      });
-    });
+    const dataArr = getChartData(timers);
 
     return (
       <div className="tasks-chart">

@@ -8,7 +8,7 @@ import {
   TableRow,
   Button
 } from '@material-ui/core';
-import connect from 'react-redux/es/connect/connect';
+import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { deleteTimer } from '../dataTabs.actions';
 import './TasksLog.scss';
