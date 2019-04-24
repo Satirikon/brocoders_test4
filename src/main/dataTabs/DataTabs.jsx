@@ -4,6 +4,7 @@ import './DataTabs.scss';
 import { Route, withRouter } from 'react-router-dom';
 import TasksChart from './tasksChart/TasksChart';
 import TasksLog from './tasksLog/TasksLog';
+import PropTypes from 'prop-types';
 
 class DataTabs extends Component {
   constructor(props) {
@@ -22,7 +23,6 @@ class DataTabs extends Component {
   };
   render() {
     const { activeTab } = this.state;
-
     return (
       <div className="tabs-menu">
         <AppBar position="static">
@@ -42,5 +42,12 @@ class DataTabs extends Component {
     );
   }
 }
+
+DataTabs.propTypes = {
+  history: PropTypes.object,
+  location: PropTypes.shape({
+    pathname: PropTypes.string
+  })
+};
 
 export default withRouter(DataTabs);

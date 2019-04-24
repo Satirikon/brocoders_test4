@@ -14,6 +14,7 @@ import { Button } from '@material-ui/core';
 import { getChartData } from './taskChart.service';
 import { bindActionCreators } from 'redux';
 import { generateTimers } from '../dataTabs.actions';
+import PropTypes from 'prop-types';
 import './TasksChart.scss';
 
 class TasksChart extends Component {
@@ -51,6 +52,18 @@ class TasksChart extends Component {
 const mapStateToProps = state => ({ timers: state.timers });
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ generateTimers }, dispatch);
+
+TasksChart.propTypes = {
+  timers: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      start: PropTypes.number,
+      duration: PropTypes.number
+    })
+  ),
+  generateTimers: PropTypes.func
+};
 
 export default connect(
   mapStateToProps,

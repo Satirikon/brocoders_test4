@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import NotFound from '../notFound/NotFound';
 import Main from '../main/Main';
 import TimerInfo from '../timerInfo/TimerInfo';
+import PropTypes from 'prop-types';
 
 class Router extends Component {
   render() {
@@ -24,8 +25,8 @@ class Router extends Component {
               return <TimerInfo timer={timer} />;
             }}
           />
-          <Route path="/" component={Main} />
-          <Route exact path="*" component={NotFound} />
+          <Route exact path={['/', '/chart']} component={Main} />
+          <Route path="*" render={() => <Redirect to={'/notFound'} />} />
         </Switch>
       </BrowserRouter>
     );
@@ -33,5 +34,9 @@ class Router extends Component {
 }
 
 const mapStateToProps = state => ({ timers: state.timers });
+
+Router.propTypes = {
+  timers: PropTypes.array
+};
 
 export default connect(mapStateToProps)(Router);

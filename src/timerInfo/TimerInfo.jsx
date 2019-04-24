@@ -10,6 +10,7 @@ import {
   TableRow,
   Button
 } from '@material-ui/core';
+import PropTypes from 'prop-types';
 
 class TimerInfo extends Component {
   render() {
@@ -58,5 +59,12 @@ class TimerInfo extends Component {
     );
   }
 }
+TimerInfo.propTypes = {
+  timer: PropTypes.shape({
+    name: PropTypes.string,
+    start: PropTypes.number,
+    duration: PropTypes.number
+  })
+};
 
 export default TimerInfo;

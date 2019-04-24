@@ -8,6 +8,7 @@ import {
   DialogTitle
 } from '@material-ui/core';
 import './Alert.scss';
+import PropTypes from 'prop-types';
 
 class AlertModal extends PureComponent {
   render() {
@@ -42,5 +43,10 @@ class AlertModal extends PureComponent {
     );
   }
 }
+
+AlertModal.propTypes = {
+  isOpened: PropTypes.bool,
+  onClose: PropTypes.func
+};
 
 export default AlertModal;

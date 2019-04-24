@@ -4,7 +4,7 @@ import './NotFound.scss';
 
 class NotFound extends PureComponent {
   render() {
-    return <div>Page is not found.</div>;
+    return <div className="error-message">Page is not found.</div>;
   }
 }
 

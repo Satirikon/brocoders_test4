@@ -9,6 +9,7 @@ import { setItem, getItem, removeItem } from '../../helpers/localStorage';
 import { addTimer } from '../dataTabs/dataTabs.actions';
 import { TIMER_START_TIME } from './timer.constants';
 import { HHMMSS } from '../../helpers/time';
+import PropTypes from 'prop-types';
 
 import './Timer.scss';
 
@@ -60,7 +61,6 @@ class Timer extends Component {
 
   render() {
     const { name, start, duration, isModalOpened } = this.state;
-
     return (
       <div className="Timer">
         <TextField
@@ -106,6 +106,10 @@ class Timer extends Component {
 
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ addTimer }, dispatch);
+
+Timer.propTypes = {
+  addTimer: PropTypes.func
+};
 
 export default connect(
   null,

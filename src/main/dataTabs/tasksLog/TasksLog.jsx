@@ -13,6 +13,7 @@ import { bindActionCreators } from 'redux';
 import { deleteTimer } from '../dataTabs.actions';
 import './TasksLog.scss';
 import { HHMMSS } from '../../../helpers/time';
+import PropTypes from 'prop-types';
 
 class TasksLog extends Component {
   render() {
@@ -79,6 +80,18 @@ class TasksLog extends Component {
 const mapStateToProps = state => ({ timers: state.timers });
 const mapDispatchToProps = dispatch =>
   bindActionCreators({ deleteTimer }, dispatch);
+
+TasksLog.propTypes = {
+  timers: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.string,
+      name: PropTypes.string,
+      start: PropTypes.number,
+      duration: PropTypes.number
+    })
+  ),
+  deleteTimer: PropTypes.func
+};
 
 export default connect(
   mapStateToProps,
