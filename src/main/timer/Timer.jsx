@@ -3,64 +3,64 @@ import { Button, TextField, Avatar } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import uuidv1 from 'uuid/v1';
-
 import AlertModal from './alert/Alert';
-import { setItem, getItem, removeItem } from '../../helpers/localStorage';
 import { addTimer } from '../dataTabs/dataTabs.actions';
-import { TIMER_START_TIME } from './timer.constants';
 import { HHMMSS } from '../../helpers/time';
 import PropTypes from 'prop-types';
+import {
+  addActiveTimer,
+  deleteActiveTimer,
+  updateActiveTimer
+} from './timer.actions';
 
 import './Timer.scss';
 
 class Timer extends Component {
   constructor(props) {
     super(props);
+    const { start } = props.activeTimer;
     this.timer = null;
-    const localStorageStartTime = getItem(TIMER_START_TIME);
     this.state = {
-      name: '',
-      duration: 0,
-      start: localStorageStartTime ? Number(localStorageStartTime) : 0,
+      duration: start === 0 ? 0 : new Date().getTime() - start,
       isModalOpened: false
     };
   }
 
   componentWillMount() {
-    if (this.state.start) this.onStart(this.state.start);
+    if (this.props.activeTimer.start)
+      this.onStart(this.props.activeTimer.start);
   }
 
   onStart = (start = new Date().getTime()) => {
-    this.setState({ start, duration: new Date().getTime() - start });
-    setItem(TIMER_START_TIME, start);
+    this.props.addActiveTimer({ start, name: this.props.activeTimer.name });
     this.timer = setInterval(() => {
       this.setState({
-        duration: new Date().getTime() - this.state.start
+        duration: new Date().getTime() - this.props.activeTimer.start
       });
     }, 1000);
   };
 
   onStop = () => {
-    if (!this.state.name) return this.setState({ isModalOpened: true });
+    const { name, start } = this.props.activeTimer;
+    if (!name) return this.setState({ isModalOpened: true });
 
     clearInterval(this.timer);
 
     this.props.addTimer({
       id: uuidv1(),
-      start: this.state.start,
+      start,
       duration: this.state.duration,
-      name: this.state.name
+      name
     });
 
-    removeItem(TIMER_START_TIME);
-
-    this.setState({ name: '', start: 0, duration: 0 });
+    this.props.deleteActiveTimer();
+    this.setState({ duration: 0 });
   };
 
-  onTaskNameChange = e => this.setState({ name: e.target.value.trim() });
-
   render() {
-    const { name, start, duration, isModalOpened } = this.state;
+    const { duration, isModalOpened } = this.state;
+    const { start, name } = this.props.activeTimer;
+
     return (
       <div className="Timer">
         <TextField
@@ -69,7 +69,9 @@ class Timer extends Component {
           value={name}
           margin="normal"
           className="text-field"
-          onChange={this.onTaskNameChange}
+          onChange={e =>
+            this.props.updateActiveTimer({ name: e.target.value.trim() })
+          }
         />
         <Avatar className="timer-circle">{HHMMSS(duration, true)}</Avatar>
 
@@ -103,15 +105,18 @@ class Timer extends Component {
     );
   }
 }
-
+const mapStateToProps = state => ({ activeTimer: state.activeTimer });
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ addTimer }, dispatch);
+  bindActionCreators(
+    { addActiveTimer, deleteActiveTimer, updateActiveTimer, addTimer },
+    dispatch
+  );
 
 Timer.propTypes = {
   addTimer: PropTypes.func
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Timer);

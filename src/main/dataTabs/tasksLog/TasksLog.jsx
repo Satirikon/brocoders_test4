@@ -18,7 +18,6 @@ import PropTypes from 'prop-types';
 class TasksLog extends Component {
   render() {
     const { timers, deleteTimer } = this.props;
-
     return (
       <div className="tasks-log">
         <Table>

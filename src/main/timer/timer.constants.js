@@ -1,1 +1,4 @@
-export const TIMER_START_TIME = 'timerStartTime';
+export const ACTIVE_TIMER = 'activeTimer';
+export const ADD_ACTIVE_TIMER = 'ADD_ACTIVE_TIMER';
+export const DELETE_ACTIVE_TIMER = 'DELETE_ACTIVE_TIMER';
+export const UPDATE_ACTIVE_TIMER = 'UPDATE_ACTIVE_TIMER';
