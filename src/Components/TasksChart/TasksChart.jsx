@@ -11,9 +11,9 @@ import {
   ResponsiveContainer
 } from 'recharts';
 import { Button } from '@material-ui/core';
-import { getChartData } from './taskChart.service';
+import { getChartData } from '../../helpers/taskChart';
 import { bindActionCreators } from 'redux';
-import { generateTasks, resetTasks } from '../dataTabs.actions';
+import { generateTasks, resetTasks } from '../../actions/dataTabs.actions';
 import PropTypes from 'prop-types';
 import './TasksChart.scss';
 

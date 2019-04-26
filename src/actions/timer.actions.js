@@ -2,7 +2,7 @@ import {
   ADD_ACTIVE_TIMER,
   DELETE_ACTIVE_TIMER,
   UPDATE_ACTIVE_TIMER
-} from './timer.constants';
+} from '../constants/timer.constants';
 
 export const addActiveTimer = timer => ({
   type: ADD_ACTIVE_TIMER,

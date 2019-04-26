@@ -1,6 +1,6 @@
 import { getItem } from './localStorage';
-import { ACTIVE_TIMER } from '../main/timer/timer.constants';
-import { TASKS } from '../main/dataTabs/dataTabs.constants';
+import { ACTIVE_TIMER } from '../constants/timer.constants';
+import { TASKS } from '../constants/dataTasks.constants';
 
 export const reHydrateStore = t => {
   let tasks = getItem(TASKS);

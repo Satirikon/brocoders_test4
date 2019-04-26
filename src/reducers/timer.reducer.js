@@ -2,7 +2,7 @@ import {
   ADD_ACTIVE_TIMER,
   DELETE_ACTIVE_TIMER,
   UPDATE_ACTIVE_TIMER
-} from './timer.constants';
+} from '../constants/timer.constants';
 
 const initialState = { name: '', start: 0 };
 

@@ -10,9 +10,9 @@ import {
 } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { deleteTask } from '../dataTabs.actions';
+import { deleteTask } from '../../actions/dataTabs.actions';
 import './TasksLog.scss';
-import { HHMMSS } from '../../../helpers/time';
+import { HHMMSS } from '../../helpers/time';
 import PropTypes from 'prop-types';
 
 class TasksLog extends Component {

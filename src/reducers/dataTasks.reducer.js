@@ -1,4 +1,8 @@
-import { ADD_TASKS, DELETE_TASKS, RESET_TASKS } from './dataTabs.constants';
+import {
+  ADD_TASKS,
+  DELETE_TASKS,
+  RESET_TASKS
+} from '../constants/dataTasks.constants';
 
 const initialState = [];
 

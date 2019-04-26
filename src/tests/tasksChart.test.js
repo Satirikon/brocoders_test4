@@ -1,4 +1,4 @@
-import { getChartData } from './taskChart.service';
+import { getChartData } from '../helpers/taskChart';
 
 it('Should return correct array values for tasks chart.', () => {
   const start = new Date();

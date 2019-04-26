@@ -1,15 +1,15 @@
 import uuidv1 from 'uuid/v1';
 import { put, all, takeLatest, select } from 'redux-saga/effects';
-import { resetTasks } from './dataTabs.actions';
+import { resetTasks } from '../actions/dataTabs.actions';
 import {
   ADD_TASKS,
   DELETE_TASKS,
   GEN_TASKS,
   RESET_TASKS,
   TASKS
-} from './dataTabs.constants';
-import { setItem, removeItem } from '../../helpers/localStorage';
-import { generateRandomInt } from '../../helpers/math';
+} from '../constants/dataTasks.constants';
+import { setItem, removeItem } from '../helpers/localStorage';
+import { generateRandomInt } from '../helpers/math';
 
 function* setTasksToLocalStorage({ payload }) {
   const tasks = yield select(store => store.tasks);

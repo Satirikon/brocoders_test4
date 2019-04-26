@@ -1,7 +1,7 @@
 import { combineReducers } from 'redux';
 
-import tasksReducer from './main/dataTabs/dataTabs.reducer';
-import activeTimerReducer from './main/timer/timer.reducer';
+import tasksReducer from './reducers/dataTasks.reducer';
+import activeTimerReducer from './reducers/timer.reducer';
 
 const appReducer = combineReducers({
   tasks: tasksReducer,

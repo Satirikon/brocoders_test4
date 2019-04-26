@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { AppBar, Tabs, Tab } from '@material-ui/core/';
-import './DataTabs.scss';
+import './DataTasks.scss';
 import { Route, withRouter } from 'react-router-dom';
-import TasksChart from './tasksChart/TasksChart';
-import TasksLog from './tasksLog/TasksLog';
+import TasksChart from '../TasksChart/TasksChart';
+import TasksLog from '../TasksLog/TasksLog';
 import PropTypes from 'prop-types';
 
-class DataTabs extends Component {
+class DataTasks extends Component {
   constructor(props) {
     super(props);
 
@@ -43,11 +43,11 @@ class DataTabs extends Component {
   }
 }
 
-DataTabs.propTypes = {
+DataTasks.propTypes = {
   history: PropTypes.object,
   location: PropTypes.shape({
     pathname: PropTypes.string
   })
 };
 
-export default withRouter(DataTabs);
+export default withRouter(DataTasks);

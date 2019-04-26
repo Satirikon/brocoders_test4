@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from 'react';
 
-import Timer from './timer/Timer';
-import DataTabs from './dataTabs/DataTabs';
+import Timer from '../Components/Timer/Timer';
+import DataTabs from '../Components/DataTasks/DataTasks';
 
 class Main extends Component {
   render() {

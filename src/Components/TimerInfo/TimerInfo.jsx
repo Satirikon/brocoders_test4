@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './TimerInfo.scss';
 import { Link, Redirect } from 'react-router-dom';
-import { HHMMSS } from '../helpers/time';
+import { HHMMSS } from '../../helpers/time';
 import {
   Table,
   TableBody,

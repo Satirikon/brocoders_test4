@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
-import NotFound from '../notFound/NotFound';
-import Main from '../main/Main';
-import TimerInfo from '../timerInfo/TimerInfo';
+import NotFound from '../Components/NotFound/NotFound';
+import Main from '../containers/Main';
+import TimerInfo from '../Components/TimerInfo/TimerInfo';
 import PropTypes from 'prop-types';
 
 class Router extends Component {

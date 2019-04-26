@@ -3,15 +3,15 @@ import { Button, TextField, Avatar } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import uuidv1 from 'uuid/v1';
-import AlertModal from './alert/Alert';
-import { addTask } from '../dataTabs/dataTabs.actions';
+import AlertModal from '../TimerAlert/Alert';
+import { addTask } from '../../actions/dataTabs.actions';
 import { HHMMSS } from '../../helpers/time';
 import PropTypes from 'prop-types';
 import {
   addActiveTimer,
   deleteActiveTimer,
   updateActiveTimer
-} from './timer.actions';
+} from '../../actions/timer.actions';
 
 import './Timer.scss';
 

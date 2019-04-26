@@ -3,7 +3,7 @@ import {
   DELETE_TASKS,
   GEN_TASKS,
   RESET_TASKS
-} from './dataTabs.constants';
+} from '../constants/dataTasks.constants';
 
 export const addTask = task => ({ type: ADD_TASKS, payload: task });
 export const deleteTask = taskArrayIndex => ({
