@@ -13,16 +13,15 @@ import {
 import { Button } from '@material-ui/core';
 import { getChartData } from './taskChart.service';
 import { bindActionCreators } from 'redux';
-import { generateTimers } from '../dataTabs.actions';
+import { generateTasks, resetTasks } from '../dataTabs.actions';
 import PropTypes from 'prop-types';
 import './TasksChart.scss';
 
 class TasksChart extends Component {
   render() {
-    const { timers, generateTimers } = this.props;
+    const { tasks, generateTasks, resetTasks } = this.props;
 
-    const dataArr = getChartData(timers);
-
+    const dataArr = getChartData(tasks);
     return (
       <div className="tasks-chart">
         <ResponsiveContainer height={500}>
@@ -32,7 +31,8 @@ class TasksChart extends Component {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="minutes" fill="#8884d8" />
+            <Bar dataKey="chartMinutes" fill="#8884d8" />
+            <Bar dataKey="chartSeconds" fill="#82ca9d" />
           </BarChart>
         </ResponsiveContainer>
 
@@ -40,21 +40,30 @@ class TasksChart extends Component {
           variant="contained"
           color="primary"
           className="action-button right"
-          onClick={() => generateTimers()}
+          onClick={generateTasks}
         >
           Generate
+        </Button>
+
+        <Button
+          variant="contained"
+          color="primary"
+          className="action-button right"
+          onClick={() => resetTasks()}
+        >
+          Reset All
         </Button>
       </div>
     );
   }
 }
 
-const mapStateToProps = state => ({ timers: state.timers });
+const mapStateToProps = state => ({ tasks: state.tasks });
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ generateTimers }, dispatch);
+  bindActionCreators({ generateTasks, resetTasks }, dispatch);
 
 TasksChart.propTypes = {
-  timers: PropTypes.arrayOf(
+  tasks: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
       name: PropTypes.string,
@@ -62,7 +71,8 @@ TasksChart.propTypes = {
       duration: PropTypes.number
     })
   ),
-  generateTimers: PropTypes.func
+  generateTasks: PropTypes.func,
+  resetTasks: PropTypes.func
 };
 
 export default connect(

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './TimerInfo.scss';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import { HHMMSS } from '../helpers/time';
 import {
   Table,
@@ -11,10 +11,13 @@ import {
   Button
 } from '@material-ui/core';
 import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
 
 class TimerInfo extends Component {
   render() {
-    const { timer } = this.props;
+    const { id } = this.props.match.params;
+    const task = this.props.tasks.find(t => t.id === id);
+    if (!task) return <Redirect to={`/404/${id}`} />;
     return (
       <div>
         <Table>
@@ -30,15 +33,15 @@ class TimerInfo extends Component {
           <TableBody>
             <TableRow>
               <TableCell component="th" scope="row">
-                {timer.id}
+                {task.id}
               </TableCell>
-              <TableCell align="center">{timer.name}</TableCell>
-              <TableCell align="center">{HHMMSS(timer.start)}</TableCell>
+              <TableCell align="center">{task.name}</TableCell>
+              <TableCell align="center">{HHMMSS(task.start)}</TableCell>
               <TableCell align="center">
-                {HHMMSS(timer.start + timer.duration)}
+                {HHMMSS(task.start + task.duration)}
               </TableCell>
               <TableCell align="center">
-                {HHMMSS(timer.duration, true)}
+                {HHMMSS(task.duration, true)}
               </TableCell>
             </TableRow>
           </TableBody>
@@ -59,6 +62,7 @@ class TimerInfo extends Component {
     );
   }
 }
+
 TimerInfo.propTypes = {
   timer: PropTypes.shape({
     name: PropTypes.string,
@@ -67,4 +71,6 @@ TimerInfo.propTypes = {
   })
 };
 
-export default TimerInfo;
+const mapStateToProps = state => ({ tasks: state.tasks });
+
+export default connect(mapStateToProps)(TimerInfo);

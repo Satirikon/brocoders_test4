@@ -4,13 +4,18 @@ import { createStore, applyMiddleware } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import appReducer from './app.reducer';
 import appSagas from './app.sagas';
-
+import { composeWithDevTools } from 'redux-devtools-extension';
 import Router from './router/Router';
+import { reHydrateStore } from './helpers/sagas';
 
 import './App.scss';
 
 const sagaMiddleware = createSagaMiddleware();
-const store = createStore(appReducer, applyMiddleware(sagaMiddleware));
+const store = createStore(
+  appReducer,
+  reHydrateStore(),
+  composeWithDevTools(applyMiddleware(sagaMiddleware))
+);
 sagaMiddleware.run(appSagas);
 
 class App extends Component {

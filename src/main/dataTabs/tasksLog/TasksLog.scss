@@ -1,8 +1,11 @@
-.wrapper {
-  text-decoration: none;
-  .action-button {
-    margin: 10px 0 10px 0;
-    width: 100px;
-    height: 50px;
+.tasks-log {
+  max-width: 100%;
+  .wrapper {
+    text-decoration: none;
+    .action-button {
+      margin: 10px 0 10px 0;
+      width: 70px;
+      height: 40px;
+    }
   }
 }

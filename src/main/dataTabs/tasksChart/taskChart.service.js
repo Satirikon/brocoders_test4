@@ -18,8 +18,9 @@ const getMinutesPerHour = (start, duration) => {
         : secondsToNextHour;
 
     outp.push({
-      hour: current.getHours(),
-      minutes: Math.round((seconds / 60) * 100) / 100
+      chartHour: current.getHours(),
+      chartMinutes: Math.trunc(seconds / 60),
+      chartSeconds: seconds % 60
     });
     current = nextHour;
   }
@@ -27,12 +28,16 @@ const getMinutesPerHour = (start, duration) => {
   return outp;
 };
 
-export const getChartData = timers => {
-  let dataArr = [...new Array(24)].map(() => ({ minutes: 0 }));
-  timers.forEach(timer => {
-    const minutesPerHour = getMinutesPerHour(timer.start, timer.duration);
+export const getChartData = tasks => {
+  let dataArr = [...new Array(24)].map(() => ({
+    chartMinutes: 0,
+    chartSeconds: 0
+  }));
+  tasks.forEach(task => {
+    const minutesPerHour = getMinutesPerHour(task.start, task.duration);
     minutesPerHour.forEach(range => {
-      dataArr[range.hour].minutes = range.minutes;
+      dataArr[range.chartHour].chartMinutes = range.chartMinutes;
+      dataArr[range.chartHour].chartSeconds = range.chartSeconds;
     });
   });
   return dataArr;

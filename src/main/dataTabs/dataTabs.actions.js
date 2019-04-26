@@ -1,14 +1,14 @@
 import {
-  ADD_TIMER,
-  DELETE_TIMER,
-  GEN_TIMERS,
-  SET_TIMERS
+  ADD_TASKS,
+  DELETE_TASKS,
+  GEN_TASKS,
+  RESET_TASKS
 } from './dataTabs.constants';
 
-export const addTimer = timer => ({ type: ADD_TIMER, payload: timer });
-export const deleteTimer = timerArrayIndex => ({
-  type: DELETE_TIMER,
-  payload: timerArrayIndex
+export const addTask = task => ({ type: ADD_TASKS, payload: task });
+export const deleteTask = taskArrayIndex => ({
+  type: DELETE_TASKS,
+  payload: taskArrayIndex
 });
-export const generateTimers = () => ({ type: GEN_TIMERS });
-export const setTimers = timers => ({ type: SET_TIMERS, payload: timers });
+export const generateTasks = () => ({ type: GEN_TASKS });
+export const resetTasks = task => ({ type: RESET_TASKS, payload: task });

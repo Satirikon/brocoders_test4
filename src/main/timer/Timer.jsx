@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import uuidv1 from 'uuid/v1';
 import AlertModal from './alert/Alert';
-import { addTimer } from '../dataTabs/dataTabs.actions';
+import { addTask } from '../dataTabs/dataTabs.actions';
 import { HHMMSS } from '../../helpers/time';
 import PropTypes from 'prop-types';
 import {
@@ -21,7 +21,7 @@ class Timer extends Component {
     const { start } = props.activeTimer;
     this.timer = null;
     this.state = {
-      duration: start === 0 ? 0 : new Date().getTime() - start,
+      duration: start === 0 ? 0 : Date.now() - start,
       isModalOpened: false
     };
   }
@@ -31,22 +31,25 @@ class Timer extends Component {
       this.onStart(this.props.activeTimer.start);
   }
 
-  onStart = (start = new Date().getTime()) => {
+  toggleModal = () =>
+    this.setState(prevState => ({ isModalOpened: !prevState.isModalOpened }));
+
+  onStart = (start = Date.now()) => {
     this.props.addActiveTimer({ start, name: this.props.activeTimer.name });
     this.timer = setInterval(() => {
       this.setState({
-        duration: new Date().getTime() - this.props.activeTimer.start
+        duration: Date.now() - this.props.activeTimer.start
       });
     }, 1000);
   };
 
   onStop = () => {
     const { name, start } = this.props.activeTimer;
-    if (!name) return this.setState({ isModalOpened: true });
+    if (!name) return this.toggleModal();
 
     clearInterval(this.timer);
 
-    this.props.addTimer({
+    this.props.addTask({
       id: uuidv1(),
       start,
       duration: this.state.duration,
@@ -60,7 +63,6 @@ class Timer extends Component {
   render() {
     const { duration, isModalOpened } = this.state;
     const { start, name } = this.props.activeTimer;
-
     return (
       <div className="Timer">
         <TextField
@@ -97,10 +99,7 @@ class Timer extends Component {
           </Button>
         )}
 
-        <AlertModal
-          isOpened={isModalOpened}
-          onClose={() => this.setState({ isModalOpened: false })}
-        />
+        <AlertModal isOpened={isModalOpened} onClose={this.toggleModal} />
       </div>
     );
   }
@@ -108,7 +107,7 @@ class Timer extends Component {
 const mapStateToProps = state => ({ activeTimer: state.activeTimer });
 const mapDispatchToProps = dispatch =>
   bindActionCreators(
-    { addActiveTimer, deleteActiveTimer, updateActiveTimer, addTimer },
+    { addActiveTimer, deleteActiveTimer, updateActiveTimer, addTask },
     dispatch
   );
 

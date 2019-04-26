@@ -10,14 +10,14 @@ import {
 } from '@material-ui/core';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import { deleteTimer } from '../dataTabs.actions';
+import { deleteTask } from '../dataTabs.actions';
 import './TasksLog.scss';
 import { HHMMSS } from '../../../helpers/time';
 import PropTypes from 'prop-types';
 
 class TasksLog extends Component {
   render() {
-    const { timers, deleteTimer } = this.props;
+    const { tasks, deleteTask } = this.props;
     return (
       <div className="tasks-log">
         <Table>
@@ -33,21 +33,21 @@ class TasksLog extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {timers.map((timer, index) => (
+            {tasks.map((task, index) => (
               <TableRow key={index}>
                 <TableCell component="th" scope="row">
                   {index + 1}
                 </TableCell>
-                <TableCell align="center">{timer.name}</TableCell>
-                <TableCell align="center">{HHMMSS(timer.start)}</TableCell>
+                <TableCell align="center">{task.name}</TableCell>
+                <TableCell align="center">{HHMMSS(task.start)}</TableCell>
                 <TableCell align="center">
-                  {HHMMSS(timer.start + timer.duration)}
+                  {HHMMSS(task.start + task.duration)}
                 </TableCell>
                 <TableCell align="center">
-                  {HHMMSS(timer.duration, true)}
+                  {HHMMSS(task.duration, true)}
                 </TableCell>
                 <TableCell align="center" className="wrapper">
-                  <Link to={`/tasks/${timer.id}`} className="link">
+                  <Link to={`/tasks/${task.id}`} className="link">
                     <Button
                       className="action-button"
                       variant="contained"
@@ -62,7 +62,7 @@ class TasksLog extends Component {
                     className="action-button"
                     variant="contained"
                     color="primary"
-                    onClick={() => deleteTimer(index)}
+                    onClick={() => deleteTask(index)}
                   >
                     DELETE
                   </Button>
@@ -76,12 +76,12 @@ class TasksLog extends Component {
   }
 }
 
-const mapStateToProps = state => ({ timers: state.timers });
+const mapStateToProps = state => ({ tasks: state.tasks });
 const mapDispatchToProps = dispatch =>
-  bindActionCreators({ deleteTimer }, dispatch);
+  bindActionCreators({ deleteTask }, dispatch);
 
 TasksLog.propTypes = {
-  timers: PropTypes.arrayOf(
+  tasks: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
       name: PropTypes.string,
@@ -89,7 +89,7 @@ TasksLog.propTypes = {
       duration: PropTypes.number
     })
   ),
-  deleteTimer: PropTypes.func
+  deleteTask: PropTypes.func
 };
 
 export default connect(

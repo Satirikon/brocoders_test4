@@ -1,7 +1,7 @@
 //Local Storage
-export const TIMERS = 'timers';
+export const TASKS = 'tasks';
 //Reducer
-export const ADD_TIMER = 'ADD_TIMER';
-export const DELETE_TIMER = 'DELETE_TIMER';
-export const GEN_TIMERS = 'GEN_TIMERS';
-export const SET_TIMERS = 'SET_TIMERS';
+export const ADD_TASKS = 'ADD_TASKS';
+export const DELETE_TASKS = 'DELETE_TASKS';
+export const GEN_TASKS = 'GEN_TASKS';
+export const RESET_TASKS = 'RESET_TASKS';

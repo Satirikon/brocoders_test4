@@ -1,22 +1,23 @@
 import uuidv1 from 'uuid/v1';
 import { put, all, takeLatest, select } from 'redux-saga/effects';
-import { setTimers } from './dataTabs.actions';
+import { resetTasks } from './dataTabs.actions';
 import {
-  ADD_TIMER,
-  DELETE_TIMER,
-  GEN_TIMERS,
-  SET_TIMERS,
-  TIMERS
+  ADD_TASKS,
+  DELETE_TASKS,
+  GEN_TASKS,
+  RESET_TASKS,
+  TASKS
 } from './dataTabs.constants';
-import { setItem } from '../../helpers/localStorage';
+import { setItem, removeItem } from '../../helpers/localStorage';
 import { generateRandomInt } from '../../helpers/math';
 
-function* setTimersToLocalStorage() {
-  const timers = yield select(store => store.timers);
-  setItem(TIMERS, JSON.stringify(timers));
+function* setTasksToLocalStorage({ payload }) {
+  const tasks = yield select(store => store.tasks);
+  if (!payload) return removeItem(TASKS);
+  setItem(TASKS, JSON.stringify(tasks));
 }
 
-function* generateTimersSaga() {
+function* generateTasksSaga() {
   const range = generateRandomInt(10, 15);
 
   const dayStart = new Date();
@@ -24,24 +25,24 @@ function* generateTimersSaga() {
   const dayEnd = new Date();
   dayEnd.setHours(23, 59, 59, 999);
 
-  let timers = [];
+  let tasks = [];
   for (let i = 0; i < range; i++) {
-    timers.push({
+    tasks.push({
       id: uuidv1(),
-      name: `task ${i + 1}_${new Date().getTime()}`,
+      name: `task ${i + 1}_${Date.now()}`,
       start: generateRandomInt(dayStart.getTime(), dayEnd.getTime()),
       duration: generateRandomInt(10, 90) * 60 * 1000
     });
   }
 
-  yield put(setTimers(timers));
+  yield put(resetTasks(tasks));
 }
 
 export function* watchData() {
   yield all([
-    takeLatest(ADD_TIMER, setTimersToLocalStorage),
-    takeLatest(DELETE_TIMER, setTimersToLocalStorage),
-    takeLatest(SET_TIMERS, setTimersToLocalStorage),
-    takeLatest(GEN_TIMERS, generateTimersSaga)
+    takeLatest(ADD_TASKS, setTasksToLocalStorage),
+    takeLatest(DELETE_TASKS, setTasksToLocalStorage),
+    takeLatest(RESET_TASKS, setTasksToLocalStorage),
+    takeLatest(GEN_TASKS, generateTasksSaga)
   ]);
 }

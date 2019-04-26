@@ -1,28 +1,20 @@
-import {
-  TIMERS,
-  ADD_TIMER,
-  DELETE_TIMER,
-  SET_TIMERS
-} from './dataTabs.constants';
-import { getItem } from '../../helpers/localStorage';
+import { ADD_TASKS, DELETE_TASKS, RESET_TASKS } from './dataTabs.constants';
 
-const localStorageTimers = getItem(TIMERS);
+const initialState = [];
 
-const initialState = localStorageTimers ? JSON.parse(localStorageTimers) : [];
-
-const timersReducer = (state = initialState, action) => {
+const tasksReducer = (state = initialState, action) => {
   switch (action.type) {
-    case ADD_TIMER:
+    case ADD_TASKS:
       return [...state, action.payload];
-    case DELETE_TIMER:
-      const timersCopy = [...state];
-      timersCopy.splice(action.payload, 1);
-      return timersCopy;
-    case SET_TIMERS:
-      return action.payload;
+    case DELETE_TASKS:
+      const tasksCopy = [...state];
+      tasksCopy.splice(action.payload, 1);
+      return tasksCopy;
+    case RESET_TASKS:
+      return action.payload ? action.payload : initialState;
     default:
       return state;
   }
 };
 
-export default timersReducer;
+export default tasksReducer;
