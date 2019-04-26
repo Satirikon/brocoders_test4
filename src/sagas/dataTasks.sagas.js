@@ -1,6 +1,6 @@
 import uuidv1 from 'uuid/v1';
 import { put, all, takeLatest, select } from 'redux-saga/effects';
-import { resetTasks } from '../actions/dataTabs.actions';
+import { resetTasks } from '../actions/dataTasks.actions';
 import {
   ADD_TASKS,
   DELETE_TASKS,

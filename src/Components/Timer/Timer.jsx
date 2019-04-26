@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import uuidv1 from 'uuid/v1';
 import AlertModal from '../TimerAlert/Alert';
-import { addTask } from '../../actions/dataTabs.actions';
+import { addTask } from '../../actions/dataTasks.actions';
 import { HHMMSS } from '../../helpers/time';
 import PropTypes from 'prop-types';
 import {

@@ -13,7 +13,7 @@ import {
 import { Button } from '@material-ui/core';
 import { getChartData } from '../../helpers/taskChart';
 import { bindActionCreators } from 'redux';
-import { generateTasks, resetTasks } from '../../actions/dataTabs.actions';
+import { generateTasks, resetTasks } from '../../actions/dataTasks.actions';
 import PropTypes from 'prop-types';
 import './TasksChart.scss';
 
@@ -31,8 +31,7 @@ class TasksChart extends Component {
             <YAxis />
             <Tooltip />
             <Legend />
-            <Bar dataKey="chartMinutes" fill="#8884d8" />
-            <Bar dataKey="chartSeconds" fill="#82ca9d" />
+            <Bar dataKey="minutes" fill="#8884d8" />
           </BarChart>
         </ResponsiveContainer>
 
